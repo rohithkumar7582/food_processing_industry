@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RPS : Investors</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+    *:before,
+    *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        padding-top: 10mm;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .background{
+        width: 430px;
+        height: 520px;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+    }
+    .background .shape{
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+    }
+    form{
+        height: 520px;
+        width: 400px;
+        background-color: rgba(255,255,255,0.13);
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 50%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+    }
+    form *{
+        font-family: 'Poppins',sans-serif;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+    form h3{
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
+
+    label{
+        display: block;
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    input{
+        display: block;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.07);
+        border-radius: 3px;
+        padding: 0 10px;
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+    ::placeholder{
+        color: #e5e5e5;
+    }
+    button{
+        margin-top: 50px;
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .social{
+    margin-top: 30px;
+    display: flex;
+    }
+    .social div{
+    background: red;
+    width: 150px;
+    border-radius: 3px;
+    padding: 5px 10px 10px 5px;
+    background-color: rgba(255,255,255,0.27);
+    color: #eaf0fb;
+    text-align: center;
+    }
+    .social div:hover{
+    background-color: black;
+    }
+    .social .fb{
+    margin-left: 25px;
+    }
+    .social i{
+    margin-right: 4px;
+    }
+    .heading{
+        color: black;
+    }
+    .copyright{
+        color:aliceblue;
+    }
+    .footer-area{
+    background-color: black;
+    color: whitesmoke;
+    height: 50px;
+    padding: 10px 0 0 1%;
+    }
+    .tab-area{
+        background-color: black;
+        height: 38px;
+        padding-top: 5px;
+    }
+    .tab-name{
+        padding:7px 1% 10px 1%;
+        color: white;
+    }
+    .tab-hover:hover{
+        background-color: whitesmoke;
+        color: black;
+    }
+    .area{
+        position: relative;
+    }
+    .loginbutton{
+        background-color: darkorange;
+        color: whitesmoke;
+        position: relative;
+        border-radius: 8px;
+        flex : 1;
+        float: right;
+        right: 40px;
+        bottom: 40px;
+        padding: 3px 1% 3px 1%;
+    }
+    .investor-page{
+        padding-left: 125px;
+        text-align: center;
+        padding-bottom: 50px;
+    }
+    .investbutton{
+        position: relative;
+        height: 30px;
+        padding-top: 0;
+        width: 110px;
+        text-align: center;
+        background-color: darkorange;
+    }
+    </style>
+</head>
+<body>
+    <div id="area" class = "area" >
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div>
+        <div>
+            <h2 class="heading">RPS FOOD LTD</h2>
+        </div>
+        <div>
+            <a class="loginbutton" href="/login">Official LOG IN</a>
+        </div>
+    </div>
+    <div class="tab-area">
+        <a href="/" class="tab-name tab-hover">Home</a>
+        <a href="/order" class="tab-name tab-hover">Order</a>
+        <a href="/investor" class="tab-name tab-hover">Investment</a>
+    </div>
+    <div>
+        <h3>Investors of FIRM</h3>
+    </div>
+    <div>
+        <div class="investor-page" id="investorpage"></div>
+    </div>
+    <div className="tab-area">
+        <script>
+            var investorpage = document.getElementById('investorpage');
+            const area = document.getElementById("area");
+            investorpage.innerHTML ="Loading Investor Details ....";
+            window.addEventListener("load",async e => {
+                investorpage.innerHTML ="";
+                const investor = await fetch("http://localhost:3000/api/investor", {method: "GET",headers: {"Content-Type": "application/json"}});
+                const investorData = await investor.json(); 
+                const headings = ['investorid','investorname','totalshareprice','nshares','brandid'];
+                const headingsMain = ['Investorid','Investor Name','Share Price','No of Shares','Brandid'];
+                var display ="";
+                display +="<table style='border:1px solid black;width:800px;padding'>";
+                display += "<tr>";
+                for (var k =0; k<5 ; k++){
+                    display += "<td style='border:1px solid black;width:100px;'>"+headingsMain[k]+"</td>";
+                }
+                display += "</tr>";
+            // Builds the HTML Table out of myList json data from Ivy restful service.
+                for (var i =0; i<investorData.length ; i++){
+                    display += "<tr>";
+                    for (var j =0; j<5 ; j++){
+                        display += "<td style='border:1px solid black;width:100px;'>"+investorData[i][headings[j]]+"</td>";
+                    }
+                    display += "</tr>";
+                }
+                display += "</table>";
+                display += "<button class='investbutton'>Invest Now</button>";
+                investorpage.innerHTML += display;
+        })
+        </script>
+    </div>
+    </div>
+    <footer class="footer-area">
+        <div class="copyright" style:{{textAlign:center}}>
+            <span>Copyright © 2020, RPS FOODS LTD </span>
+            <span>All rights reserved.</span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

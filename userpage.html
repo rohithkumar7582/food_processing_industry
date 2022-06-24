@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RPS : My Orders</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+    *:before,
+    *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        padding-top: 10mm;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    label{
+        display: block;
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    ::placeholder{
+        color: black
+    }
+    button{
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .social{
+    margin-top: 30px;
+    display: flex;
+    padding-left: 365px;
+    }
+    .social div{
+    background: red;
+    width: 150px;
+    border-radius: 3px;
+    padding: 5px 10px 10px 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    }
+    .social div:hover{
+    background-color: black;
+    }
+    .social .fb{
+    margin-left: 25px;
+    }
+    .social i{
+    margin-right: 4px;
+    }
+    .heading{
+        color: black;
+    }
+    .copyright{
+        color:aliceblue;
+    }
+    .footer-area{
+    background-color: black;
+    color: whitesmoke;
+    height: 50px;
+    padding: 10px 0 0 1%;
+    }
+    .tab-area{
+        background-color: black;
+        height: 38px;
+        padding-top: 5px;
+    }
+    .tab-name{
+        padding:7px 1% 10px 1%;
+        color: white;
+    }
+    .tab-hover:hover{
+        background-color: whitesmoke;
+        color: black;
+    }
+    .area{
+        position: relative;
+    }
+    .loginbutton{
+        background-color: darkorange;
+        color: whitesmoke;
+        position: relative;
+        border-radius: 8px;
+        flex : 1;
+        float: right;
+        right: 40px;
+        bottom: 40px;
+        padding: 3px 1% 3px 1%;
+    }
+    .login{
+        background-color: darkorange;
+        color: ghostwhite;
+        border-radius: 10px;
+        height: 33px;
+        width: 300px;
+        position: relative;
+        padding:0;
+    }
+    .input{
+        border-radius: 10px;
+        height: 35px;
+        width: 300px;
+        align-content: center;
+        text-align: center;
+    }
+    .inputlabel{
+        font-size: medium;
+        font-weight: 800;
+    }
+    .outer-login-area{  
+        position: relative;
+        padding-left: 375px;
+    }
+    .login-button{
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+    .order-data{
+        position: relative;
+    }
+    </style>
+</head>
+<body>
+    <div class = "area" >
+        <div>
+            <div>
+                <h2 class="heading">RPS FOOD LTD</h2>
+            </div>
+            <div>
+                <a id="loginbutton" class="loginbutton" href="/login">Register</a>
+            </div>
+        </div>
+        <div class="tab-area">
+            <a href="/" class="tab-name tab-hover">Home</a>
+            <a href="/order" class="orderpro tab-name tab-hover">Order</a>
+            <a href="/investor" class="tab-name tab-hover">Investment</a>
+        </div>
+        <div id = "orderdetails">
+        </div>
+        <div id="orderpage">
+
+        <div>
+            <script>
+                const logintop = document.getElementById("loginbutton")
+                const orderData = document.getElementById("orderdetails")
+                const orderpage = document.getElementById("orderpage")
+                window.addEventListener("load", async e => {
+                    var jsonReq = {}
+                    jsonReq.username = sessionStorage.getItem('Username');
+                    jsonReq.password = sessionStorage.getItem('Password');
+
+                    const data = await fetch("http://localhost:3000/login",{method :"POST",headers: {"content-type": "application/json"}, body : JSON.stringify(jsonReq)});
+                    const result = await data.json();
+                    console.log("Order records retrieved successfully !!");
+                    jsonReq ={};
+                    const cid = result[0].customerid
+                    localStorage.setItem('cid',cid);
+                    jsonReq.customerid = result[0]['customerid'];
+                    orderData.innerHTML = "";
+                    const order = await fetch("http://localhost:3000/order",{method :"POST",headers: {"content-type": "application/json"}, body : JSON.stringify(jsonReq)});
+                    var orderdata = await order.json();
+                    orderData.innerHTML += '<h4>My Orders</h4>';
+                    for (var i=0; i< orderdata.length; i++)
+                    {
+                        orderData.innerHTML += '<div class ="order-data">';
+                        orderData.innerHTML += '<p>Order No '+(i+1)+' : ' + orderdata[i]['orderid']+ '</p>';
+                        orderData.innerHTML += '<p>Product  : ' + orderdata[i]['productid']+ '</p>';
+                        orderData.innerHTML += '<p>Payment  : ' + orderdata[i]['paymentmode']+ '</p>';
+                        orderData.innerHTML += '<span>-------------------------------------------------</span>';
+                        orderData.innerHTML += '</div>';
+                    }
+                    logintop.innerHTML = 'Logged in as '+ sessionStorage.getItem('Username') + '<p></p>';
+                })
+            </script>
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <footer class="footer-area">
+            <div class="copyright">
+                <span>Copyright © 2020, RPS FOODS LTD </span>
+                <span>All rights reserved.</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

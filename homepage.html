@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RPS : HomePage</title>
+        <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+    *:before,
+    *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        padding-top: 10mm;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    label{
+        display: block;
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    input{
+        display: block;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.07);
+        border-radius: 3px;
+        padding: 0 10px;
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+    ::placeholder{
+        color: #e5e5e5;
+    }
+    button{
+        margin-top: 50px;
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .social{
+    margin-top: 30px;
+    display: flex;
+    }
+    .social div{
+    background: red;
+    width: 150px;
+    border-radius: 3px;
+    padding: 5px 10px 10px 5px;
+    background-color: rgba(255,255,255,0.27);
+    color: #eaf0fb;
+    text-align: center;
+    }
+    .social div:hover{
+    background-color: black;
+    }
+    .social .fb{
+    margin-left: 25px;
+    }
+    .social i{
+    margin-right: 4px;
+    }
+    .heading{
+        color: black;
+        text-align: center;
+        font-family: Tahoma;
+        font-size: x-large;
+    }
+    .copyright{
+        color:aliceblue;
+    }
+    .footer-area{
+    background-color: black;
+    color: whitesmoke;
+    height: 50px;
+    padding: 10px 0 0 1%;
+    }
+    .tab-area{
+        background-color: black;
+        height: 38px;
+        padding-top: 5px;
+    }
+    .tab-name{
+        padding:7px 1% 10px 1%;
+        color: white;
+    }
+    .tab-hover:hover{
+        background-color: whitesmoke;
+        color: black;
+    }
+    .area{
+        position: relative;
+    }
+    .loginbutton{
+        background-color: darkorange;
+        color: whitesmoke;
+        position: relative;
+        border-radius: 8px;
+        flex : 1;
+        float: right;
+        right: 40px;
+        bottom: 40px;
+        padding: 3px 1% 3px 1%;
+    }
+    .page-data{
+        text-align: center;
+        color: darkviolet;
+    }
+    </style>
+</head>
+<body>
+    <div class = "area" >
+    <div>
+        <div>
+            <h2 class="heading">RPS FOOD LTD</h2>
+        </div>
+        <div>
+            <a class="loginbutton" href="/login">Customer LOG IN</a>
+        </div>
+    </div>
+    <div class="tab-area">
+        <a href="/" class="tab-name tab-hover">Home</a>
+        <a href="/order" class="tab-name tab-hover">Order</a>
+        <a href="/investor" class="tab-name tab-hover">Investment</a>
+    </div>
+    <div>
+        <h2 class="page-data">Welcome to the World of Food Investments !!</h2>
+        <img height="500" width="800" src="https://aapkagrocery.com/wp-content/uploads/2020/06/grocery.png">
+    </div>
+    </div>
+    <footer class="footer-area">
+        <div class="copyright" style:{{textAlign:center}}>
+            <span>Copyright © 2020, RPS FOODS LTD </span>
+            <span>All rights reserved.</span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
