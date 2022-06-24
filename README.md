@@ -2,6 +2,7 @@
 DBMS Project on Food Products Industry using PostgreSQL, HTML, CSS, NodeJS, Javascript
 
 Web Project can be started using command : **npm init**
+
 Project Details to be entered and package.json files are ready.
 
 Run the SQL files as uploaded in the repository to create database and add records.
